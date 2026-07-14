@@ -107,6 +107,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -475,17 +476,19 @@ p {
 
 /* Mobile Navigation Overlay */
 .nav-overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.45);
   z-index: var(--z-overlay);
+  /* Hidden by default — invisible + non-interactive */
   opacity: 0;
-  transition: opacity var(--transition-base);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .nav-overlay.active {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* ----- Hero Section (Full-Width Cinematic Background) ----- */
@@ -2183,36 +2186,50 @@ p {
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 300px;
-    height: 100vh;
-    background: var(--white);
+    left: 0;
+    /* Slide in from LEFT using transform — no right/width animation */
+    transform: translateX(-100%);
+    width: min(80vw, 320px);
+    height: 100%;
+    height: 100dvh;
+    /* dynamic viewport height — respects mobile browser chrome */
+    background: #ffffff;
     flex-direction: column;
-    padding: 100px var(--space-xl) var(--space-xl);
-    gap: var(--space-sm);
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-    transition: right var(--transition-base);
-    z-index: var(--z-overlay);
+    align-items: flex-start;
+    padding: 90px var(--space-xl) var(--space-xl);
+    gap: var(--space-xs);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18);
+    transition: transform 0.3s ease;
+    z-index: calc(var(--z-overlay) + 1);
+    /* sits above the backdrop */
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .nav-links.open {
-    right: 0;
+    transform: translateX(0);
   }
 
   .nav-links a {
     padding: 0.75rem 1rem;
     font-size: var(--text-base);
+    color: var(--primary-dark);
     width: 100%;
     border-radius: var(--radius-sm);
   }
 
-  .nav-links a::after {
-    display: none;
+  .nav-links a:hover {
+    color: var(--primary);
+    background: rgba(26, 58, 92, 0.06);
   }
 
-  .nav-links a:hover {
-    background: rgba(26, 58, 92, 0.06);
+  .nav-links a.active {
+    color: var(--primary);
+    background: rgba(26, 58, 92, 0.08);
+  }
+
+  .nav-links a::after {
+    display: none;
   }
 
   .nav-toggle {
@@ -2220,7 +2237,8 @@ p {
   }
 
   .nav-overlay.active {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .grid-2,

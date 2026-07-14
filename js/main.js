@@ -11,38 +11,44 @@ document.addEventListener('DOMContentLoaded', function () {
     const navLinks = document.querySelector('.nav-links');
     const navOverlay = document.querySelector('.nav-overlay');
 
+    function openNav() {
+        navToggle.classList.add('active');
+        navLinks.classList.add('open');
+        if (navOverlay) navOverlay.classList.add('active');
+        // Lock scroll on body (& iOS Safari fix)
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+        if (navOverlay) navOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
     if (navToggle) {
         navToggle.addEventListener('click', function () {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('open');
-            if (navOverlay) {
-                navOverlay.classList.toggle('active');
-            }
-            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+            navLinks.classList.contains('open') ? closeNav() : openNav();
         });
     }
 
+    // Backdrop tap closes menu
     if (navOverlay) {
-        navOverlay.addEventListener('click', function () {
-            this.classList.remove('active');
-            navToggle.classList.remove('active');
-            navLinks.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+        navOverlay.addEventListener('click', closeNav);
     }
 
-    // Close navigation when a link is clicked (mobile)
+    // Close when a nav link is tapped on mobile
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', function () {
-            if (window.innerWidth <= 768) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('open');
-                if (navOverlay) {
-                    navOverlay.classList.remove('active');
-                }
-                document.body.style.overflow = '';
-            }
+            if (window.innerWidth <= 768) closeNav();
         });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && navLinks && navLinks.classList.contains('open')) {
+            closeNav();
+        }
     });
 
     // ----- Navbar Scroll Effect -----
