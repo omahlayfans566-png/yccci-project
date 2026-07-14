@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Young And Chosen for Christ (YCCCI) - Home</title>
     <meta name="description"
-        content="Young Adults for Christ (YAFC) - A Catholic youth organization inspiring faith, community, and participation.">
+        content="Young and Chosen for Christ (YCCCI) - A Catholic youth organization inspiring faith, community, and participation.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a href="index.html" class="navbar-logo">
-                <img src="images/youngforchristlogo.png" alt="YACFC Logo" width="48" height="48">
+                <img src="images/youngforchristlogo.png" alt="YCCCI Logo" width="48" height="48">
                 <div class="logo-text">
                     YCCCI
                     <span class="logo-text-small">Young And Chosen for Christ</span>
@@ -58,39 +58,65 @@
 
     <!-- ===== Hero Section ===== -->
     <section class="hero" id="home">
-        <div class="hero-bg">
-            <img src="images/hero-bg.jpg" alt="Young Adults for Christ community" loading="lazy">
-        </div>
-        <div class="hero-overlay"></div>
-        <div class="hero-pattern"></div>
 
-        <div class="hero-content">
-            <div class="hero-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                    <path d="M2 17l10 5 10-5" />
-                    <path d="M2 12l10 5 10-5" />
-                </svg>
-                Catholic Youth Organization
+        <!-- Full-width background image layer -->
+        <div class="hero-bg-image" aria-hidden="true"></div>
+
+        <!-- Left-to-right gradient overlay: deep navy → transparent -->
+        <div class="hero-overlay" aria-hidden="true"></div>
+
+        <!-- Pulsing golden halo (depth effect behind cross) -->
+        <div class="hero-float-glow" aria-hidden="true"></div>
+
+        <!-- Content wrapper — left-aligned, max 640px -->
+        <div class="hero-inner">
+            <div class="hero-content-col">
+
+                <!-- Badge -->
+                <div class="hero-badge animate-slide-up" style="animation-delay:0s;">
+                    <svg class="hero-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <rect x="10" y="2" width="4" height="20" rx="1" />
+                        <rect x="3" y="8" width="18" height="4" rx="1" />
+                    </svg>
+                    Catholic Youth Organization
+                </div>
+
+                <!-- Main heading -->
+                <h1 class="hero-title animate-slide-up" style="animation-delay:0.15s;">
+                    Young And Chosen for Christ
+                    <span class="hero-title-highlight">Rooted in Faith,<br>United in Love</span>
+                </h1>
+
+                <!-- Description -->
+                <p class="hero-text animate-slide-up" style="animation-delay:0.3s;">
+                    A vibrant community of young Catholics dedicated to growing in faith,
+                    building meaningful relationships, and serving others through the love of Christ.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="hero-actions animate-slide-up" style="animation-delay:0.45s;">
+                    <a href="https://t.me/+CodcB2syKeExZjY0" target="_blank" rel="noopener noreferrer"
+                        class="btn-hero-primary">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                        </svg>
+                        Join Our Community
+                    </a>
+                    <a href="pages/about/about.html" class="btn-hero-secondary">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                        </svg>
+                        Learn More
+                    </a>
+                </div>
+
             </div>
-
-            <h1 class="hero-title">
-                Young And Chosen for Christ
-                <span>Rooted in Faith, United in Love</span>
-            </h1>
-
-            <p class="hero-text">
-                A vibrant community of young Catholics dedicated to growing in faith,
-                building meaningful relationships, and serving others through the love of Christ.
-            </p>
-
-            <div class="hero-actions">
-                <a href="pages/about/about.html" class="btn btn-primary btn-lg">Learn More</a>
-                <a href="pages/contact/contact.html" class="btn btn-outline btn-lg">Contact Us</a>
-            </div>
         </div>
 
-        <div class="hero-scroll">
+        <!-- Scroll indicator -->
+        <div class="hero-scroll" aria-hidden="true">
             <span>Scroll</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M7 13l5 5 5-5" />
@@ -104,14 +130,14 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image fade-in-left">
-                    <img src="images/our-vision.jpg" alt="YAFC Community" loading="lazy">
+                    <img src="images/our-vision.jpg" alt="YCCCI Community" loading="lazy">
                 </div>
 
                 <div class="about-content fade-in-right">
                     <span class="section-tag">About Us</span>
                     <h2 class="section-title">Our Mission & Vision</h2>
                     <p>
-                        Young Adults for Christ (YAFC) is a dynamic Catholic youth organization
+                        Young and Chosen for Christ (YCCCI) is a dynamic Catholic youth organization
                         committed to nurturing the spiritual growth of young adults. We provide a
                         welcoming environment where faith comes alive through prayer, fellowship,
                         and service.
@@ -399,7 +425,7 @@
                     <img src="images/leader-2.jpg" alt="Sarah Emmanuel" class="leader-image" loading="lazy">
                     <h3>Sarah Emmanuel</h3>
                     <span class="leader-position">President</span>
-                    <p class="leader-bio">Leading with vision and dedication to the YAFC mission.</p>
+                    <p class="leader-bio">Leading with vision and dedication to the YCCCI mission.</p>
                 </div>
 
                 <div class="leader-card fade-in" style="transition-delay: 0.2s;">
@@ -487,7 +513,7 @@
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                                     <circle cx="12" cy="10" r="3" />
                                 </svg>
-                                YAFC Center
+                                YCCCI Center
                             </span>
                         </div>
                         <p>Deep dive into Scripture with guided reflection and discussion.</p>
@@ -537,7 +563,7 @@
         <div class="container">
             <div class="section-header fade-in">
                 <span class="section-tag">Gallery</span>
-                <h2 class="section-title">Moments with YAFC</h2>
+                <h2 class="section-title">Moments with YCCCI</h2>
                 <p class="section-subtitle">
                     Capturing the beauty of our community in faith, fellowship, and service.
                 </p>
@@ -545,7 +571,7 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item fade-in" data-category="events">
-                    <img src="images/gallery-1.jpg" alt="YAFC Event" loading="lazy">
+                    <img src="images/gallery-1.jpg" alt="YCCCI Event" loading="lazy">
                     <div class="gallery-item-overlay">
                         <span>Worship Night</span>
                     </div>
@@ -666,7 +692,7 @@
                         </div>
                         <div>
                             <h4>Phone</h4>
-                            <p>+234 800 YAFC (9322)</p>
+                            <p>+234 800 YCCCI (9322)</p>
                             <p>+234 801 234 5678</p>
                         </div>
                     </div>
@@ -680,8 +706,8 @@
                         </div>
                         <div>
                             <h4>Email</h4>
-                            <p>info@yafc.org</p>
-                            <p>contact@yafc.org</p>
+                            <p>info@yccci.org</p>
+                            <p>contact@yccci.org</p>
                         </div>
                     </div>
 
@@ -706,7 +732,7 @@
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.0!2d3.0!3d6.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzAnMDAuMCJOIDPCsDAwJzAwLjAiRQ!5e0!3m2!1sen!2sng!4v1"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        title="YAFC Location Map">
+                        title="YCCCI Location Map">
                     </iframe>
                 </div>
             </div>
@@ -719,10 +745,10 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html" class="navbar-logo">
-                        <img src="images/logo.svg" alt="YAFC Logo" width="48" height="48">
+                        <img src="images/youngforchristlogo.png" alt="YCCCI Logo" width="48" height="48">
                         <div class="logo-text" style="color: var(--white);">
-                            YAFC
-                            <span class="logo-text-small" style="color: rgba(255,255,255,0.5);">Young Adults for
+                            YCCCI
+                            <span class="logo-text-small" style="color: rgba(255,255,255,0.5);">Young and Chosen for
                                 Christ</span>
                         </div>
                     </a>
@@ -793,14 +819,14 @@
                                 <path
                                     d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                             </svg>
-                            +234 800 YAFC (9322)
+                            +234 800 YCCCI (9322)
                         </p>
                         <p>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                 <polyline points="22,6 12,13 2,6" />
                             </svg>
-                            info@yafc.org
+                            info@yccci.org
                         </p>
                         <p>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -814,7 +840,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2026 Young Adults for Christ (YAFC). All rights reserved.</p>
+                <p>&copy; 2026 Young and Chosen for Christ (YCCCI). All rights reserved.</p>
                 <p>Designed with faith &hearts; for the glory of God.</p>
             </div>
         </div>

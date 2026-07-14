@@ -1,9 +1,9 @@
 /* ============================================
-   YAFC - Young Adults for Christ
+   YCCCI - Young and Chosen for Christ
    Main JavaScript
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     'use strict';
 
     // ----- Navigation Toggle (Hamburger Menu) -----
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navOverlay = document.querySelector('.nav-overlay');
 
     if (navToggle) {
-        navToggle.addEventListener('click', function() {
+        navToggle.addEventListener('click', function () {
             this.classList.toggle('active');
             navLinks.classList.toggle('open');
             if (navOverlay) {
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (navOverlay) {
-        navOverlay.addEventListener('click', function() {
+        navOverlay.addEventListener('click', function () {
             this.classList.remove('active');
             navToggle.classList.remove('active');
             navLinks.classList.remove('open');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close navigation when a link is clicked (mobile)
     document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             if (window.innerWidth <= 768) {
                 navToggle.classList.remove('active');
                 navLinks.classList.remove('open');
@@ -50,15 +50,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let lastScrollY = window.scrollY;
 
     if (navbar) {
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const currentScrollY = window.scrollY;
-            
+
             if (currentScrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
             }
-            
+
             lastScrollY = currentScrollY;
         }, { passive: true });
     }
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.classList.remove('active');
             const href = link.getAttribute('href');
-            if (href === currentPage || 
+            if (href === currentPage ||
                 (currentPage === '' && href === 'index.html') ||
                 (currentPage === 'index.html' && href === 'index.html')) {
                 link.classList.add('active');
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const animationObserver = new IntersectionObserver(function(entries) {
+        const animationObserver = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const backToTop = document.querySelector('.back-to-top');
 
     if (backToTop) {
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             if (window.scrollY > 400) {
                 backToTop.classList.add('visible');
             } else {
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, { passive: true });
 
-        backToTop.addEventListener('click', function() {
+        backToTop.addEventListener('click', function () {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (categoryBtns.length > 0 && galleryItems.length > 0) {
         categoryBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 // Update active button
                 categoryBtns.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
@@ -167,14 +167,14 @@ document.addEventListener('DOMContentLoaded', function() {
         accordionItems.forEach(item => {
             const header = item.querySelector('.accordion-header');
             if (header) {
-                header.addEventListener('click', function() {
+                header.addEventListener('click', function () {
                     const isActive = item.classList.contains('active');
-                    
+
                     // Close all accordion items
                     accordionItems.forEach(i => {
                         i.classList.remove('active');
                     });
-                    
+
                     // Toggle current
                     if (!isActive) {
                         item.classList.add('active');
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (modalTriggers.length > 0) {
         modalTriggers.forEach(trigger => {
-            trigger.addEventListener('click', function(e) {
+            trigger.addEventListener('click', function (e) {
                 e.preventDefault();
                 const modalId = this.getAttribute('data-modal');
                 const modal = document.getElementById(modalId);
@@ -207,14 +207,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const closeBtn = modal.querySelector('.modal-close');
 
             if (overlay) {
-                overlay.addEventListener('click', function() {
+                overlay.addEventListener('click', function () {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
                 });
             }
 
             if (closeBtn) {
-                closeBtn.addEventListener('click', function() {
+                closeBtn.addEventListener('click', function () {
                     modal.classList.remove('active');
                     document.body.style.overflow = '';
                 });
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') {
                 modals.forEach(modal => {
                     if (modal.classList.contains('active')) {
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (lightbox && lightboxImages.length > 0) {
         lightboxImages.forEach(item => {
-            item.addEventListener('click', function(e) {
+            item.addEventListener('click', function (e) {
                 e.stopPropagation();
                 const lightboxImg = lightbox.querySelector('img');
                 if (lightboxImg && this.tagName === 'IMG') {
@@ -251,12 +251,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        lightbox.addEventListener('click', function() {
+        lightbox.addEventListener('click', function () {
             this.classList.remove('active');
             document.body.style.overflow = '';
         });
 
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                 lightbox.classList.remove('active');
                 document.body.style.overflow = '';
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ----- Novena Day Navigation -----
     const novenaDayNav = document.querySelector('.novena-day-nav');
-    
+
     if (novenaDayNav) {
         const prevBtn = novenaDayNav.querySelector('.prev-day');
         const nextBtn = novenaDayNav.querySelector('.next-day');
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
-            prevBtn.addEventListener('click', function(e) {
+            prevBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (currentDay > 1) {
                     currentDay--;
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            nextBtn.addEventListener('click', function(e) {
+            nextBtn.addEventListener('click', function (e) {
                 e.preventDefault();
                 if (currentDay < totalDays) {
                     currentDay++;
@@ -328,16 +328,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ----- Smooth Scroll for Anchor Links -----
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 e.preventDefault();
                 const navHeight = navbar ? navbar.offsetHeight : 72;
                 const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -348,11 +348,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ----- Contact Form -----
     const contactForm = document.querySelector('.contact-form form');
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Simple form validation
             const name = this.querySelector('#name');
             const email = this.querySelector('#email');
@@ -405,8 +405,8 @@ document.addEventListener('DOMContentLoaded', function() {
         error.textContent = message;
         input.style.borderColor = 'var(--error)';
         input.parentNode.appendChild(error);
-        
-        input.addEventListener('input', function() {
+
+        input.addEventListener('input', function () {
             this.style.borderColor = '';
             const err = this.parentNode.querySelector('.form-error');
             if (err) err.remove();
@@ -421,16 +421,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const statNumbers = document.querySelectorAll('.stat-number');
 
     if (statNumbers.length > 0) {
-        const counterObserver = new IntersectionObserver(function(entries) {
+        const counterObserver = new IntersectionObserver(function (entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const target = entry.target;
                     const finalValue = parseInt(target.getAttribute('data-count') || target.textContent.replace(/,/g, ''), 10);
-                    
+
                     if (!isNaN(finalValue)) {
                         animateCounter(target, finalValue);
                     }
-                    
+
                     counterObserver.unobserve(target);
                 }
             });
@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const timer = setInterval(() => {
             step++;
             current += increment;
-            
+
             if (step >= steps) {
                 element.textContent = target.toLocaleString();
                 clearInterval(timer);
@@ -461,12 +461,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ----- Active Nav Link on Scroll (for homepage sections) -----
     const sections = document.querySelectorAll('section[id]');
-    
+
     if (sections.length > 0 && navbar) {
         const navLinksArray = document.querySelectorAll('.nav-links a[href^="#"]');
-        
+
         if (navLinksArray.length > 0) {
-            const sectionObserver = new IntersectionObserver(function(entries) {
+            const sectionObserver = new IntersectionObserver(function (entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const id = entry.target.getAttribute('id');
@@ -497,6 +497,28 @@ document.addEventListener('DOMContentLoaded', function() {
     checkGalleryLayout();
     window.addEventListener('resize', checkGalleryLayout);
 
+    // ----- Hero Section mouse-parallax (desktop only) -----
+    const heroBgImage = document.querySelector('.hero-bg-image');
+    const heroGlow = document.querySelector('.hero-float-glow');
+    const heroEl = document.querySelector('.hero');
+
+    if (heroBgImage && heroEl && window.innerWidth >= 1025) {
+        heroEl.addEventListener('mousemove', function (e) {
+            const rect = this.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            heroBgImage.style.transform = `translate(${x * 10}px, ${y * 7}px) scale(1.04)`;
+            if (heroGlow) {
+                heroGlow.style.transform = `translate(${x * 22}px, ${y * 22}px)`;
+            }
+        }, { passive: true });
+
+        heroEl.addEventListener('mouseleave', function () {
+            heroBgImage.style.transform = '';
+            if (heroGlow) heroGlow.style.transform = '';
+        });
+    }
+
     // ----- Lazy Loading for Images -----
     if ('loading' in HTMLImageElement.prototype) {
         document.querySelectorAll('img[loading="lazy"]').forEach(img => {
@@ -505,9 +527,9 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         // Fallback for browsers that don't support lazy loading
         const lazyImages = document.querySelectorAll('img[data-src]');
-        
+
         if (lazyImages.length > 0) {
-            const lazyObserver = new IntersectionObserver(function(entries) {
+            const lazyObserver = new IntersectionObserver(function (entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const img = entry.target;
