@@ -89,7 +89,7 @@
   /* Z-Index Scale */
   --z-base: 1;
   --z-dropdown: 100;
-  --z-sticky: 200;
+  --z-sticky: 350;
   --z-overlay: 300;
   --z-modal: 400;
   --z-toast: 500;
@@ -1499,95 +1499,22 @@ p {
   box-shadow: var(--shadow-md);
 }
 
-.form-group {
-  margin-bottom: var(--space-lg);
-}
-
-.form-label {
-  display: block;
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--dark-gray);
-  margin-bottom: var(--space-xs);
-}
-
-.form-input,
-.form-textarea {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 2px solid var(--medium-gray);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  color: var(--near-black);
-  transition: border-color var(--transition-fast);
-  background: var(--off-white);
-}
-
-.form-input:focus,
-.form-textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.1);
-}
-
-.form-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
-.form-input::placeholder,
-.form-textarea::placeholder {
-  color: var(--gray);
-}
-
-/* ----- Map ----- */
-.map-container {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  height: 400px;
-}
-
-.map-container iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
 /* ----- Footer ----- */
 .footer {
-  background: var(--primary-dark);
-  color: rgba(255, 255, 255, 0.85);
-  padding: var(--space-4xl) 0 var(--space-xl);
-  position: relative;
+  background: var(--near-black);
+  color: var(--white);
+  padding: var(--space-4xl) 0 0;
 }
 
-.footer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--secondary), var(--accent), var(--secondary));
+.footer p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: var(--text-sm);
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: var(--space-2xl);
-}
-
-.footer-brand .navbar-logo {
-  margin-bottom: var(--space-md);
-}
-
-.footer-brand p {
-  font-size: var(--text-sm);
-  color: rgba(255, 255, 255, 0.6);
-  line-height: 1.7;
-  margin-bottom: var(--space-lg);
+  gap: var(--space-3xl);
 }
 
 .footer h4 {
@@ -1597,35 +1524,41 @@ p {
   font-family: var(--font-heading);
 }
 
+.footer-brand p {
+  margin-top: var(--space-lg);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
 .footer-links a {
-  display: block;
-  padding: var(--space-xs) 0;
-  font-size: var(--text-sm);
   color: rgba(255, 255, 255, 0.6);
-  transition: all var(--transition-fast);
+  font-size: var(--text-sm);
+  transition: color var(--transition-fast);
 }
 
 .footer-links a:hover {
   color: var(--secondary);
-  padding-left: var(--space-sm);
 }
 
 .footer-contact p {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
-  font-size: var(--text-sm);
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
 .footer-contact svg {
   width: 16px;
   height: 16px;
-  min-width: 16px;
+  flex-shrink: 0;
+  color: var(--secondary);
 }
 
-/* Social Icons */
+/* Social Links */
 .social-links {
   display: flex;
   gap: var(--space-sm);
@@ -1646,8 +1579,8 @@ p {
 
 .social-link:hover {
   background: var(--secondary);
-  transform: translateY(-2px);
   color: var(--white);
+  transform: translateY(-3px);
 }
 
 .social-link svg {
@@ -1655,26 +1588,64 @@ p {
   height: 18px;
 }
 
+/* Footer Bottom */
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: var(--space-md);
+  padding: var(--space-xl) 0;
+  margin-top: var(--space-3xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .footer-bottom p {
-  font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.4);
   margin-bottom: 0;
+  font-size: var(--text-xs);
+}
+
+/* ----- Back to Top ----- */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  z-index: var(--z-sticky);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--primary-light);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* ----- Breadcrumbs ----- */
 .breadcrumbs {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   padding: 120px 0 var(--space-3xl);
   position: relative;
   overflow: hidden;
@@ -1684,830 +1655,70 @@ p {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 50%, rgba(200, 163, 78, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 20%, rgba(200, 163, 78, 0.05) 0%, transparent 50%);
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
 }
 
 .breadcrumbs-content {
   position: relative;
   z-index: 1;
-  text-align: center;
 }
 
 .breadcrumbs-content h1 {
   color: var(--white);
+  font-size: var(--text-4xl);
   margin-bottom: var(--space-sm);
 }
 
-.breadcrumbs-content .breadcrumb-links {
+.breadcrumb-links {
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: var(--space-sm);
   font-size: var(--text-sm);
-}
-
-.breadcrumbs-content .breadcrumb-links a {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.breadcrumbs-content .breadcrumb-links a:hover {
+.breadcrumb-links a {
   color: var(--secondary);
-}
-
-.breadcrumbs-content .breadcrumb-links span {
-  color: var(--secondary);
-}
-
-/* ----- Novena Day Page ----- */
-.novena-day-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-lg) 0;
-  border-bottom: 1px solid var(--medium-gray);
-  margin-bottom: var(--space-xl);
-}
-
-.novena-day-nav .day-indicator {
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.novena-day-content {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.novena-day-content .prayer-text {
-  font-family: var(--font-accent);
-  font-size: var(--text-lg);
-  line-height: 1.9;
-  color: var(--near-black);
-}
-
-.novena-day-content .prayer-text p {
-  margin-bottom: var(--space-lg);
-}
-
-/* ----- Novena Experience (Overview & Day Pages) ----- */
-.novena-experience {
-  padding: var(--space-2xl) 0 var(--space-4xl);
-}
-
-.novena-back {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-xs);
-  background: none;
-  border: none;
-  color: var(--gray);
-  font-family: var(--font-body);
-  font-size: var(--text-sm);
-  font-weight: 600;
-  cursor: pointer;
-  padding: var(--space-sm) 0;
   transition: color var(--transition-fast);
-  margin-bottom: var(--space-lg);
 }
 
-.novena-back:hover {
-  color: var(--primary);
+.breadcrumb-links a:hover {
+  color: var(--secondary-light);
 }
 
-/* Novena Overview */
-.novena-overview-hero {
-  display: flex;
-  gap: var(--space-xl);
-  align-items: flex-start;
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  box-shadow: var(--shadow-md);
-  margin-bottom: var(--space-2xl);
+.breadcrumb-links span:last-child {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-.novena-overview-hero img {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: var(--radius-md);
-  flex-shrink: 0;
-  box-shadow: var(--shadow-sm);
-}
-
-.novena-overview-hero > div {
-  flex: 1;
-}
-
-.novena-overview-hero h2 {
-  font-size: var(--text-2xl);
-  margin-bottom: var(--space-sm);
-  color: var(--primary-dark);
-}
-
-.novena-overview-hero p {
-  font-size: var(--text-base);
-  color: var(--gray);
-  margin-bottom: var(--space-lg);
-  line-height: 1.6;
-}
-
-/* Progress bar */
-.progress-track {
-  width: 100%;
-  height: 6px;
-  background: var(--light-gray);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: var(--space-sm);
-}
-
-.progress-track span {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
-  border-radius: 3px;
-  transition: width var(--transition-slow);
-}
-
-.progress-copy {
-  font-size: var(--text-sm) !important;
-  color: var(--gray) !important;
-  margin-bottom: 0 !important;
-  font-weight: 500;
-}
-
-/* Day grid in overview */
-.day-list-heading {
-  font-size: var(--text-xl);
-  margin-bottom: var(--space-lg);
-  color: var(--primary-dark);
-}
-
-.novena-day-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: var(--space-md);
-  margin-bottom: var(--space-2xl);
-}
-
-.day-tile {
-  background: var(--white);
-  border: 1px solid var(--medium-gray);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  text-align: left;
-  cursor: pointer;
-  transition: all var(--transition-base);
-  font-family: var(--font-body);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-xs);
-}
-
-.day-tile:hover {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-
-.day-tile span {
-  font-size: var(--text-xs);
-  color: var(--secondary);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.day-tile strong {
-  font-size: var(--text-sm);
-  color: var(--primary-dark);
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.day-tile.completed {
-  border-color: var(--success);
-  background: rgba(74, 140, 92, 0.04);
-}
-
-.day-tile.completed span {
-  color: var(--success);
-}
-
-.overview-actions {
-  display: flex;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.overview-actions .btn {
-  min-width: 180px;
-}
-
-/* Prayer Day Page */
-.prayer-header {
-  text-align: center;
-  margin-bottom: var(--space-2xl);
-  padding-bottom: var(--space-xl);
-  border-bottom: 1px solid var(--medium-gray);
-}
-
-.prayer-header .day-count {
-  font-family: var(--font-accent);
-  font-size: var(--text-lg);
-  color: var(--gray);
-  margin-bottom: var(--space-xs);
-}
-
-.prayer-header h1 {
-  font-size: var(--text-2xl);
-  color: var(--primary-dark);
-  margin-bottom: var(--space-lg);
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Mini progress dots */
-.mini-progress {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-top: var(--space-md);
-}
-
-.mini-progress span {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-full);
-  background: var(--medium-gray);
-  transition: all var(--transition-base);
-}
-
-.mini-progress span.active {
-  background: var(--secondary);
-  transform: scale(1.2);
-}
-
-/* Prayer body */
-.prayer-body {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.prayer-body section {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  margin-bottom: var(--space-lg);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(26, 58, 92, 0.06);
-}
-
-.prayer-body section h2 {
-  font-family: var(--font-accent);
-  font-size: var(--text-xl);
-  color: var(--primary);
-  margin-bottom: var(--space-md);
-  padding-bottom: var(--space-sm);
-  border-bottom: 2px solid var(--secondary);
-  display: inline-block;
-}
-
-.prayer-body section p {
-  font-family: var(--font-accent);
-  font-size: var(--text-lg);
-  line-height: 1.8;
-  color: var(--near-black);
-  margin-bottom: var(--space-md);
-}
-
-.prayer-body section p:last-child {
-  margin-bottom: 0;
-}
-
-.prayer-body section p em {
-  color: var(--gray);
-  font-style: italic;
-}
-
-.prayer-body section p strong {
-  color: var(--primary);
-}
-
-.prayer-body p.amen {
-  font-family: var(--font-heading);
-  font-size: var(--text-2xl);
-  color: var(--secondary);
-  text-align: center;
-  margin-top: var(--space-lg);
-  font-weight: 700;
-}
-
-.prayer-body .scripture {
-  background: linear-gradient(135deg, var(--off-white), var(--white));
-  border-left: 4px solid var(--secondary);
-}
-
-/* Day navigation */
-.day-actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--medium-gray);
-}
-
-.day-actions .btn {
-  min-width: 160px;
-}
-
-.day-actions .btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.day-actions .btn.is-complete {
-  background: var(--success);
-  border-color: var(--success);
-  color: var(--white);
-}
-
-/* Completion message */
-.completion-message {
-  text-align: center;
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  border-radius: var(--radius-lg);
-  padding: var(--space-3xl) var(--space-xl);
-  margin-top: var(--space-2xl);
-  color: var(--white);
-}
-
-.completion-message h2 {
-  font-size: var(--text-3xl);
-  color: var(--secondary);
-  margin-bottom: var(--space-md);
-}
-
-.completion-message p {
-  font-size: var(--text-lg);
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-xl);
-}
-
-.completion-message .btn {
-  background: var(--secondary);
-  border-color: var(--secondary);
-  color: var(--primary-dark);
-}
-
-.completion-message .btn:hover {
-  background: var(--secondary-light);
-  border-color: var(--secondary-light);
-}
-
-/* Responsive Novena Experience */
-@media (max-width: 768px) {
-  .novena-overview-hero {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: var(--space-lg);
-  }
-
-  .novena-overview-hero img {
-    width: 180px;
-    height: 180px;
-  }
-
-  .novena-day-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
-
-  .day-tile {
-    padding: var(--space-md);
-  }
-
-  .prayer-body section {
-    padding: var(--space-lg);
-  }
-
-  .prayer-body section p {
-    font-size: var(--text-base);
-    line-height: 1.7;
-  }
-
-  .prayer-header h1 {
-    font-size: var(--text-xl);
-  }
-
-  .day-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .day-actions .btn {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .overview-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .overview-actions .btn {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .completion-message {
-    padding: var(--space-2xl) var(--space-lg);
-  }
-
-  .completion-message h2 {
-    font-size: var(--text-2xl);
-  }
-}
-
-@media (max-width: 480px) {
-  .novena-overview-hero img {
-    width: 140px;
-    height: 140px;
-  }
-
-  .novena-day-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
-  }
-
-  .day-tile {
-    padding: var(--space-sm) var(--space-md);
-  }
-
-  .day-tile strong {
-    font-size: var(--text-xs);
-  }
-
-  .prayer-body section {
-    padding: var(--space-md);
-    border-radius: var(--radius-md);
-  }
-
-  .prayer-body section h2 {
-    font-size: var(--text-lg);
-  }
-
-  .prayer-body section p {
-    font-size: var(--text-sm);
-    line-height: 1.6;
-  }
-
-  .prayer-header h1 {
-    font-size: var(--text-lg);
-    padding: 0 var(--space-sm);
-  }
-}
-
-/* ----- Month Sections for Activities ----- */
-.month-section {
-  margin-bottom: var(--space-3xl);
-}
-
-.month-section:last-child {
-  margin-bottom: 0;
-}
-
-.month-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
-  padding-bottom: var(--space-md);
-  border-bottom: 2px solid var(--secondary);
-}
-
-.month-header h2 {
-  font-size: var(--text-2xl);
-  color: var(--primary);
-}
-
-.month-header span {
-  font-size: var(--text-sm);
-  color: var(--gray);
-  font-weight: 500;
-}
-
-/* ----- Animations ----- */
-.fade-in {
+/* ----- Scroll Animations ----- */
+.fade-in,
+.fade-in-left,
+.fade-in-right,
+.fade-in-scale {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-in-left {
-  opacity: 0;
   transform: translateX(-30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in-left.visible {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 .fade-in-right {
-  opacity: 0;
   transform: translateX(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in-right.visible {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 .fade-in-scale {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(20px) scale(0.95);
 }
 
+.fade-in.visible,
+.fade-in-left.visible,
+.fade-in-right.visible,
 .fade-in-scale.visible {
   opacity: 1;
-  transform: scale(1);
-}
-
-/* ----- Loading Spinner ----- */
-.loading-spinner {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--medium-gray);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ----- Back to Top ----- */
-.back-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 48px;
-  height: 48px;
-  background: var(--primary);
-  color: var(--white);
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-md);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all var(--transition-base);
-  z-index: var(--z-dropdown);
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.back-to-top:hover {
-  background: var(--primary-light);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-.back-to-top svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* ----- News Cards ----- */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--space-xl);
-}
-
-.news-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-base);
-}
-
-.news-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.news-card-image {
-  height: 200px;
-  overflow: hidden;
-}
-
-.news-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition-slow);
-}
-
-.news-card:hover .news-card-image img {
-  transform: scale(1.05);
-}
-
-.news-card-body {
-  padding: var(--space-lg);
-}
-
-.news-card-body .news-date {
-  font-size: var(--text-xs);
-  color: var(--secondary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: block;
-  margin-bottom: var(--space-sm);
-}
-
-.news-card-body h3 {
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-sm);
-}
-
-.news-card-body p {
-  font-size: var(--text-sm);
-  color: var(--gray);
-  margin-bottom: var(--space-md);
-}
-
-/* ----- Page Content ----- */
-.page-content {
-  padding: var(--space-4xl) 0;
-}
-
-.page-content h2 {
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-lg);
-}
-
-.page-content h3 {
-  margin-top: var(--space-xl);
-  margin-bottom: var(--space-md);
-}
-
-.page-content ul,
-.page-content ol {
-  margin-bottom: var(--space-md);
-  padding-left: var(--space-xl);
-}
-
-.page-content ul {
-  list-style: disc;
-}
-
-.page-content ol {
-  list-style: decimal;
-}
-
-.page-content li {
-  margin-bottom: var(--space-sm);
-  color: var(--dark-gray);
-}
-
-/* ----- Values / Objectives List ----- */
-.values-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--space-xl);
-  margin-top: var(--space-xl);
-}
-
-.value-item {
-  background: var(--white);
-  padding: var(--space-xl);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  text-align: center;
-  transition: all var(--transition-base);
-  border: 1px solid rgba(26, 58, 92, 0.06);
-}
-
-.value-item:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.value-icon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto var(--space-lg);
-  color: var(--white);
-}
-
-.value-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.value-item h4 {
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-sm);
-}
-
-.value-item p {
-  font-size: var(--text-sm);
-  color: var(--gray);
-  margin-bottom: 0;
-}
-
-/* ----- Accordion / Tabs ----- */
-.accordion {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-sm);
-}
-
-.accordion-item {
-  background: var(--white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-}
-
-.accordion-header {
-  padding: var(--space-lg);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--primary);
-  font-size: var(--text-base);
-  transition: background var(--transition-fast);
-}
-
-.accordion-header:hover {
-  background: rgba(26, 58, 92, 0.03);
-}
-
-.accordion-header svg {
-  width: 20px;
-  height: 20px;
-  transition: transform var(--transition-base);
-}
-
-.accordion-item.active .accordion-header svg {
-  transform: rotate(180deg);
-}
-
-.accordion-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height var(--transition-base);
-}
-
-.accordion-item.active .accordion-body {
-  max-height: 500px;
-}
-
-.accordion-body-inner {
-  padding: 0 var(--space-lg) var(--space-lg);
-  font-size: var(--text-sm);
-  color: var(--dark-gray);
-  line-height: 1.7;
+  transform: translateX(0) translateY(0) scale(1);
 }
 
 /* ----- Modal ----- */
@@ -2527,28 +1738,27 @@ p {
 .modal-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
   position: relative;
   background: var(--white);
-  border-radius: var(--radius-lg);
   padding: var(--space-2xl);
-  max-width: 800px;
+  border-radius: var(--radius-lg);
+  max-width: 600px;
   width: 90%;
-  max-height: 85vh;
+  max-height: 80vh;
   overflow-y: auto;
+  box-shadow: var(--shadow-xl);
   animation: modalIn 0.3s ease;
 }
 
 @keyframes modalIn {
   from {
     opacity: 0;
-    transform: scale(0.95) translateY(20px);
+    transform: scale(0.95) translateY(10px);
   }
-
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
