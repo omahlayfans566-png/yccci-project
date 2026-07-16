@@ -32,6 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Close button inside mobile menu
+    const navClose = document.querySelector('.nav-close');
+    if (navClose) {
+        navClose.addEventListener('click', closeNav);
+    }
+
     // Backdrop tap closes menu
     if (navOverlay) {
         navOverlay.addEventListener('click', closeNav);

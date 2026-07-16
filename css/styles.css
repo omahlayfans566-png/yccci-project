@@ -448,7 +448,7 @@ p {
   padding: 4px;
   background: none;
   border: none;
-  z-index: var(--z-overlay);
+  z-index: calc(var(--z-overlay) + 2);
 }
 
 .nav-toggle span {
@@ -461,17 +461,32 @@ p {
   transform-origin: center;
 }
 
-.nav-toggle.active span:nth-child(1) {
-  transform: translateY(7.5px) rotate(45deg);
+/* Close button inside mobile menu */
+.nav-close {
+  display: none;
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--light-gray);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  z-index: 1;
 }
 
-.nav-toggle.active span:nth-child(2) {
-  opacity: 0;
-  transform: translateX(-10px);
+.nav-close:hover {
+  background: var(--medium-gray);
 }
 
-.nav-toggle.active span:nth-child(3) {
-  transform: translateY(-7.5px) rotate(-45deg);
+.nav-close svg {
+  width: 18px;
+  height: 18px;
+  color: var(--primary-dark);
 }
 
 /* Mobile Navigation Overlay */
@@ -1243,13 +1258,31 @@ p {
 /* Responsive novena image height */
 @media (max-width: 768px) {
   .novena-card-image {
-    height: 200px;
+    height: 240px;
   }
 }
 
 @media (max-width: 480px) {
   .novena-card-image {
-    height: 175px;
+    height: 220px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .novena-card-image {
+    height: 280px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .novena-card-image {
+    height: 320px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .novena-card-image {
+    height: 400px;
   }
 }
 
@@ -1719,6 +1752,432 @@ p {
   margin-bottom: var(--space-lg);
 }
 
+/* ----- Novena Experience (Overview & Day Pages) ----- */
+.novena-experience {
+  padding: var(--space-2xl) 0 var(--space-4xl);
+}
+
+.novena-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: none;
+  border: none;
+  color: var(--gray);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  padding: var(--space-sm) 0;
+  transition: color var(--transition-fast);
+  margin-bottom: var(--space-lg);
+}
+
+.novena-back:hover {
+  color: var(--primary);
+}
+
+/* Novena Overview */
+.novena-overview-hero {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.novena-overview-hero img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.novena-overview-hero > div {
+  flex: 1;
+}
+
+.novena-overview-hero h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-sm);
+  color: var(--primary-dark);
+}
+
+.novena-overview-hero p {
+  font-size: var(--text-base);
+  color: var(--gray);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+}
+
+/* Progress bar */
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: var(--light-gray);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.progress-track span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
+  border-radius: 3px;
+  transition: width var(--transition-slow);
+}
+
+.progress-copy {
+  font-size: var(--text-sm) !important;
+  color: var(--gray) !important;
+  margin-bottom: 0 !important;
+  font-weight: 500;
+}
+
+/* Day grid in overview */
+.day-list-heading {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-lg);
+  color: var(--primary-dark);
+}
+
+.novena-day-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.day-tile {
+  background: var(--white);
+  border: 1px solid var(--medium-gray);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.day-tile:hover {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.day-tile span {
+  font-size: var(--text-xs);
+  color: var(--secondary);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.day-tile strong {
+  font-size: var(--text-sm);
+  color: var(--primary-dark);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.day-tile.completed {
+  border-color: var(--success);
+  background: rgba(74, 140, 92, 0.04);
+}
+
+.day-tile.completed span {
+  color: var(--success);
+}
+
+.overview-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.overview-actions .btn {
+  min-width: 180px;
+}
+
+/* Prayer Day Page */
+.prayer-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--medium-gray);
+}
+
+.prayer-header .day-count {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
+  color: var(--gray);
+  margin-bottom: var(--space-xs);
+}
+
+.prayer-header h1 {
+  font-size: var(--text-2xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-lg);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Mini progress dots */
+.mini-progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: var(--space-md);
+}
+
+.mini-progress span {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: var(--medium-gray);
+  transition: all var(--transition-base);
+}
+
+.mini-progress span.active {
+  background: var(--secondary);
+  transform: scale(1.2);
+}
+
+/* Prayer body */
+.prayer-body {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.prayer-body section {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(26, 58, 92, 0.06);
+}
+
+.prayer-body section h2 {
+  font-family: var(--font-accent);
+  font-size: var(--text-xl);
+  color: var(--primary);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--secondary);
+  display: inline-block;
+}
+
+.prayer-body section p {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
+  line-height: 1.8;
+  color: var(--near-black);
+  margin-bottom: var(--space-md);
+}
+
+.prayer-body section p:last-child {
+  margin-bottom: 0;
+}
+
+.prayer-body section p em {
+  color: var(--gray);
+  font-style: italic;
+}
+
+.prayer-body section p strong {
+  color: var(--primary);
+}
+
+.prayer-body p.amen {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--secondary);
+  text-align: center;
+  margin-top: var(--space-lg);
+  font-weight: 700;
+}
+
+.prayer-body .scripture {
+  background: linear-gradient(135deg, var(--off-white), var(--white));
+  border-left: 4px solid var(--secondary);
+}
+
+/* Day navigation */
+.day-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--medium-gray);
+}
+
+.day-actions .btn {
+  min-width: 160px;
+}
+
+.day-actions .btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.day-actions .btn.is-complete {
+  background: var(--success);
+  border-color: var(--success);
+  color: var(--white);
+}
+
+/* Completion message */
+.completion-message {
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--radius-lg);
+  padding: var(--space-3xl) var(--space-xl);
+  margin-top: var(--space-2xl);
+  color: var(--white);
+}
+
+.completion-message h2 {
+  font-size: var(--text-3xl);
+  color: var(--secondary);
+  margin-bottom: var(--space-md);
+}
+
+.completion-message p {
+  font-size: var(--text-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-xl);
+}
+
+.completion-message .btn {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: var(--primary-dark);
+}
+
+.completion-message .btn:hover {
+  background: var(--secondary-light);
+  border-color: var(--secondary-light);
+}
+
+/* Responsive Novena Experience */
+@media (max-width: 768px) {
+  .novena-overview-hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .novena-overview-hero img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .novena-day-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .day-tile {
+    padding: var(--space-md);
+  }
+
+  .prayer-body section {
+    padding: var(--space-lg);
+  }
+
+  .prayer-body section p {
+    font-size: var(--text-base);
+    line-height: 1.7;
+  }
+
+  .prayer-header h1 {
+    font-size: var(--text-xl);
+  }
+
+  .day-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .day-actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .overview-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .overview-actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .completion-message {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .completion-message h2 {
+    font-size: var(--text-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .novena-overview-hero img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .novena-day-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .day-tile {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .day-tile strong {
+    font-size: var(--text-xs);
+  }
+
+  .prayer-body section {
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+  }
+
+  .prayer-body section h2 {
+    font-size: var(--text-lg);
+  }
+
+  .prayer-body section p {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  .prayer-header h1 {
+    font-size: var(--text-lg);
+    padding: 0 var(--space-sm);
+  }
+}
+
 /* ----- Month Sections for Activities ----- */
 .month-section {
   margin-bottom: var(--space-3xl);
@@ -2186,9 +2645,9 @@ p {
   .nav-links {
     position: fixed;
     top: 0;
-    left: 0;
-    /* Slide in from LEFT using transform — no right/width animation */
-    transform: translateX(-100%);
+    right: 0;
+    /* Slide in from RIGHT */
+    transform: translateX(100%);
     width: min(80vw, 320px);
     height: 100%;
     height: 100dvh;
@@ -2196,9 +2655,9 @@ p {
     background: #ffffff;
     flex-direction: column;
     align-items: flex-start;
-    padding: 90px var(--space-xl) var(--space-xl);
+    padding: 80px var(--space-xl) var(--space-xl);
     gap: var(--space-xs);
-    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.18);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.18);
     transition: transform 0.3s ease;
     z-index: calc(var(--z-overlay) + 1);
     /* sits above the backdrop */
@@ -2208,6 +2667,10 @@ p {
 
   .nav-links.open {
     transform: translateX(0);
+  }
+
+  .nav-close {
+    display: flex;
   }
 
   .nav-links a {
