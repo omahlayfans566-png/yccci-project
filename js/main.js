@@ -572,4 +572,304 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         document.body.classList.add('no-touch');
     }
+
+    // ============================================
+    // Donation Page Functionality
+    // ============================================
+
+    const donationForm = document.getElementById('donationForm');
+
+    if (donationForm) {
+        const fullNameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const amountInput = document.getElementById('amount');
+        const paymentMethodInput = document.getElementById('paymentMethod');
+        const narrationInput = document.getElementById('narration');
+        const proofUpload = document.getElementById('proofUpload');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const filePreview = document.getElementById('filePreview');
+        const fileName = document.getElementById('fileName');
+        const filePreviewThumb = document.getElementById('filePreviewThumb');
+        const fileRemoveBtn = document.getElementById('fileRemoveBtn');
+        const successModal = document.getElementById('donationSuccessModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+        // WhatsApp number - replace with organization's official number
+        const WHATSAPP_NUMBER = '+234XXXXXXXXXX';
+
+        let selectedFile = null;
+
+        // ----- File Upload Handling -----
+        if (proofUpload) {
+            // Click on upload area triggers file input
+            if (fileUploadArea) {
+                fileUploadArea.addEventListener('click', function () {
+                    proofUpload.click();
+                });
+            }
+
+            // Handle file selection
+            proofUpload.addEventListener('change', function () {
+                handleFileSelect(this.files[0]);
+            });
+
+            // Drag and drop support
+            if (fileUploadArea) {
+                fileUploadArea.addEventListener('dragover', function (e) {
+                    e.preventDefault();
+                    this.classList.add('dragover');
+                });
+
+                fileUploadArea.addEventListener('dragleave', function () {
+                    this.classList.remove('dragover');
+                });
+
+                fileUploadArea.addEventListener('drop', function (e) {
+                    e.preventDefault();
+                    this.classList.remove('dragover');
+                    if (e.dataTransfer.files.length > 0) {
+                        proofUpload.files = e.dataTransfer.files;
+                        handleFileSelect(e.dataTransfer.files[0]);
+                    }
+                });
+            }
+
+            // Remove file
+            if (fileRemoveBtn) {
+                fileRemoveBtn.addEventListener('click', function () {
+                    removeFile();
+                });
+            }
+        }
+
+        function handleFileSelect(file) {
+            if (!file) return;
+
+            // Validate file type
+            const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                showFieldError('proofError', 'Please upload a JPG, JPEG, PNG, or PDF file.');
+                return;
+            }
+
+            // Validate file size (10MB max)
+            if (file.size > 10 * 1024 * 1024) {
+                showFieldError('proofError', 'File size must be less than 10MB.');
+                return;
+            }
+
+            selectedFile = file;
+            clearFieldError('proofError');
+
+            // Show preview
+            if (filePreview) {
+                filePreview.style.display = 'block';
+            }
+
+            if (fileName) {
+                fileName.textContent = file.name;
+            }
+
+            // Show thumbnail for images
+            if (filePreviewThumb) {
+                filePreviewThumb.innerHTML = '';
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = 'Proof of payment preview';
+                        filePreviewThumb.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    // PDF icon
+                    filePreviewThumb.innerHTML = `
+                        <div style="display:flex;align-items:center;gap:0.5rem;padding:0.5rem;background:var(--light-gray);border-radius:var(--radius-sm);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                            <span style="font-size:var(--text-sm);color:var(--gray);">PDF Document</span>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function removeFile() {
+            selectedFile = null;
+            if (proofUpload) proofUpload.value = '';
+            if (filePreview) filePreview.style.display = 'none';
+            if (fileName) fileName.textContent = '';
+            if (filePreviewThumb) filePreviewThumb.innerHTML = '';
+            clearFieldError('proofError');
+        }
+
+        // ----- Form Validation -----
+        function validateField(input, errorId, message) {
+            if (!input.value.trim()) {
+                showFieldError(errorId, message);
+                input.classList.add('error');
+                return false;
+            }
+            clearFieldError(errorId);
+            input.classList.remove('error');
+            return true;
+        }
+
+        function showFieldError(errorId, message) {
+            const errorEl = document.getElementById(errorId);
+            if (errorEl) {
+                errorEl.textContent = message;
+            }
+        }
+
+        function clearFieldError(errorId) {
+            const errorEl = document.getElementById(errorId);
+            if (errorEl) {
+                errorEl.textContent = '';
+            }
+        }
+
+        // Clear errors on input
+        donationForm.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', function () {
+                this.classList.remove('error');
+                const errorId = this.id + 'Error';
+                clearFieldError(errorId);
+            });
+        });
+
+        // ----- Form Submission -----
+        donationForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let isValid = true;
+
+            // Validate Full Name
+            if (!validateField(fullNameInput, 'fullNameError', 'Please enter your full name.')) {
+                isValid = false;
+            }
+
+            // Validate Phone
+            if (!validateField(phoneInput, 'phoneError', 'Please enter your phone number.')) {
+                isValid = false;
+            }
+
+            // Validate Amount
+            if (!amountInput.value.trim() || parseFloat(amountInput.value) <= 0) {
+                showFieldError('amountError', 'Please enter a valid donation amount.');
+                amountInput.classList.add('error');
+                isValid = false;
+            } else {
+                clearFieldError('amountError');
+                amountInput.classList.remove('error');
+            }
+
+            // Validate Payment Method
+            if (!paymentMethodInput.value) {
+                showFieldError('paymentMethodError', 'Please select a payment method.');
+                paymentMethodInput.classList.add('error');
+                isValid = false;
+            } else {
+                clearFieldError('paymentMethodError');
+                paymentMethodInput.classList.remove('error');
+            }
+
+            // Validate Narration
+            if (!validateField(narrationInput, 'narrationError', 'Please enter the purpose of your donation.')) {
+                isValid = false;
+            }
+
+            // Validate Proof of Payment
+            if (!selectedFile) {
+                showFieldError('proofError', 'Please upload your proof of payment.');
+                isValid = false;
+            } else {
+                clearFieldError('proofError');
+            }
+
+            if (!isValid) {
+                // Scroll to first error
+                const firstError = donationForm.querySelector('.error, .form-error-text:not(:empty)');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+
+            // Build WhatsApp message
+            const name = fullNameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            const email = emailInput.value.trim();
+            const amount = amountInput.value.trim();
+            const paymentMethod = paymentMethodInput.value;
+            const narration = narrationInput.value.trim();
+
+            const message = `Hello,
+
+A new donation has been submitted.
+
+Name:
+${name}
+
+Phone:
+${phone}
+
+Email:
+${email || 'Not provided'}
+
+Donation Amount:
+₦${amount}
+
+Payment Method:
+${paymentMethod}
+
+Narration:
+${narration}
+
+Thank you.`;
+
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Show success modal
+            if (successModal) {
+                successModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // ----- Success Modal -----
+        function closeDonationModal() {
+            if (successModal) {
+                successModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeDonationModal);
+        }
+
+        // Close modal on overlay click
+        if (successModal) {
+            const modalOverlay = successModal.querySelector('.donation-modal-overlay');
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', closeDonationModal);
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && successModal && successModal.classList.contains('active')) {
+                closeDonationModal();
+            }
+        });
+    }
 });

@@ -64,7 +64,45 @@
         activeKey = key; listing.hidden = true; experience.hidden = false; page.hidden = true; overview.hidden = false;
         const completed = getCompleted(key);
         const resume = Math.min(9, completed.length ? Math.max(...completed) + 1 : 1);
-        overview.innerHTML = `<div class="novena-overview-hero"><img src="${n.image}" alt="${n.title}" decoding="async"><div><span class="section-tag">Nine days of prayer</span><h2>${n.title}</h2><p>${n.description}</p><div class="progress-track"><span style="width:${completed.length / 9 * 100}%"></span></div><p class="progress-copy">${completed.length} of 9 days completed</p></div></div><h3 class="day-list-heading">Choose a day</h3><div class="novena-day-grid">${n.themes.map((theme, i) => `<button type="button" class="day-tile ${completed.includes(i + 1) ? 'completed' : ''}" data-day="${i + 1}"><span>Day ${i + 1}${completed.includes(i + 1) ? ' ✓' : ''}</span><strong>${theme}</strong></button>`).join('')}</div><div class="overview-actions"><button class="btn btn-primary" type="button" data-day="${resume}">${completed.length ? `Resume at Day ${resume}` : 'Begin Day 1'}</button>${completed.length ? '<button class="btn btn-outline-dark restart-novena" type="button">Restart novena</button>' : ''}</div>`;
+        const pct = Math.round(completed.length / 9 * 100);
+        overview.innerHTML = `<div class="novena-progress-card">
+            <div class="novena-progress-header">
+                <span class="novena-progress-title">Progress</span>
+                <div class="novena-progress-stats">
+                    <span><strong>${completed.length}</strong> of <strong>9</strong> Days Completed</span>
+                    <span><strong>${9 - completed.length}</strong> Remaining</span>
+                </div>
+            </div>
+            <div class="novena-progress-bar-track">
+                <div class="novena-progress-bar-fill" style="width:${pct}%"></div>
+            </div>
+            <div class="novena-progress-percentage">${pct}% Complete</div>
+        </div>
+        <div class="novena-day-selection">
+            <div class="novena-day-selection-header">
+                <h3>Choose a Day</h3>
+                <p>Select today's novena prayer below.</p>
+            </div>
+            <div class="novena-day-grid">${n.themes.map((theme, i) => {
+                const dayNum = i + 1;
+                const isCompleted = completed.includes(dayNum);
+                const isActive = dayNum === resume;
+                return `<div class="novena-day-card ${isCompleted ? 'completed' : ''} ${isActive && !isCompleted ? 'active' : ''}" data-day="${dayNum}">
+                    <div class="novena-day-card-number">Day ${dayNum}</div>
+                    <div class="novena-day-card-title">${theme}</div>
+                    <div class="novena-day-card-subtitle">${n.verses[i].substring(0, 50)}...</div>
+                    <span class="novena-day-card-status ${isCompleted ? 'completed-status' : isActive ? 'active-status' : 'pending'}">
+                        ${isCompleted ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Completed' : isActive ? '▶ Current' : 'Pending'}
+                    </span>
+                </div>`;
+            }).join('')}</div>
+            <div class="novena-day-cta">
+                <button class="novena-day-cta-btn" type="button" data-day="${resume}">
+                    ${completed.length === 9 ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg><span>Pray Again</span>' : completed.length ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Resume Day ${resume}</span>` : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Begin Day 1</span>`}
+                </button>
+                ${completed.length > 0 ? '<button class="btn btn-outline-dark restart-novena" type="button" style="margin-top:var(--space-md);">Restart novena</button>' : ''}
+            </div>
+        </div>`;
         overview.querySelectorAll('[data-day]').forEach(el => el.addEventListener('click', () => showDay(Number(el.dataset.day))));
         overview.querySelector('.restart-novena')?.addEventListener('click', restart);
         if (updateHash) history.pushState({ novena: key }, '', `#${key}`);

@@ -29,6 +29,7 @@
                     href="../activities/activities.html">Activities</a><a href="../prayers/prayers.html">Prayers</a><a
                     href="../novena/novena.html">Novena</a><a href="../leadership/leadership.html">Leadership</a><a
                     href="../gallery/gallery.html">Gallery</a><a href="../events/events.html">Events</a><a
+                    href="../donation/donation.html">Donation</a><a
                     href="contact.html" class="active">Contact</a>
             </div>
             <button class="nav-toggle"
@@ -147,28 +148,36 @@
                     </div>
                 </div>
 
-                <div class="contact-form fade-in-right">
-                    <h3 style="margin-bottom: var(--space-lg);">Send Us a Message</h3>
-                    <form>
-                        <div class="form-group">
-                            <label class="form-label" for="name">Full Name</label>
-                            <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+                <!-- ===== Premium Redesigned Contact Form ===== -->
+                <div class="contact-form-card fade-in-right">
+                    <div class="contact-form-header">
+                        <h3>Send Us a Message</h3>
+                        <p>We'll get back to you as soon as possible.</p>
+                    </div>
+                    <form class="premium-contact-form">
+                        <div class="premium-form-group">
+                            <label class="premium-form-label" for="name">Full Name</label>
+                            <input type="text" id="name" class="premium-form-input" placeholder="Enter your full name" required>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email Address</label>
-                            <input type="email" id="email" class="form-input" placeholder="Enter your email address"
-                                required>
+                        <div class="premium-form-group">
+                            <label class="premium-form-label" for="email">Email Address</label>
+                            <input type="email" id="email" class="premium-form-input" placeholder="Enter your email address" required>
                         </div>
-                        <div class="form-group">
-                            <label class="form-label" for="subject">Subject</label>
-                            <input type="text" id="subject" class="form-input" placeholder="What is this about?">
+                        <div class="premium-form-group">
+                            <label class="premium-form-label" for="subject">Subject</label>
+                            <input type="text" id="subject" class="premium-form-input" placeholder="What is this about?">
                         </div>
-                        <div class="form-group">
-                            <label class="form-label" for="message">Message</label>
-                            <textarea id="message" class="form-textarea" placeholder="Write your message here..."
-                                required></textarea>
+                        <div class="premium-form-group">
+                            <label class="premium-form-label" for="message">Message</label>
+                            <textarea id="message" class="premium-form-textarea" placeholder="Write your message here..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Send Message</button>
+                        <button type="submit" class="premium-submit-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13"/>
+                                <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                            Send Message
+                        </button>
                     </form>
                 </div>
             </div>
