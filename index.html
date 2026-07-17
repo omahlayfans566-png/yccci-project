@@ -22,9 +22,7 @@
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
     <!-- Preload hero background — eliminates the largest contentful paint delay -->
-    <link rel="preload" as="image" href="images/yccci-hero-section.png" fetchpriority="high">
-    <!-- Preload logo — visible immediately in navbar -->
-    <link rel="preload" as="image" href="images/youngforchristlogo.png">
+    <link rel="preload" as="image" href="images/yccci-hero-section.webp" fetchpriority="high">
 </head>
 
 <body>
@@ -32,7 +30,10 @@
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <a href="index.html" class="navbar-logo">
-                <img src="images/youngforchristlogo.png" alt="YCCCI Logo" width="48" height="48">
+                <picture>
+                    <source srcset="images/youngforchristlogo.webp" type="image/webp">
+                    <img src="images/youngforchristlogo.png" alt="YCCCI Logo" width="48" height="48" decoding="async">
+                </picture>
                 <div class="logo-text">
                     YCCCI
                     <span class="logo-text-small">Young And Chosen for Christ</span>
@@ -67,7 +68,12 @@
     <section class="hero" id="home">
 
         <!-- Full-width background image layer -->
-        <div class="hero-bg-image" aria-hidden="true"></div>
+        <div class="hero-bg-image" aria-hidden="true">
+            <picture>
+                <source srcset="images/yccci-hero-section.webp" type="image/webp">
+                <img src="images/yccci-hero-section.png" alt="" aria-hidden="true" fetchpriority="high" style="display:none;">
+            </picture>
+        </div>
 
         <!-- Left-to-right gradient overlay: deep navy → transparent -->
         <div class="hero-overlay" aria-hidden="true"></div>
@@ -137,8 +143,11 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-image fade-in-left">
-                    <img src="images/our-vision.jpg" alt="YCCCI Community" width="600" height="450" loading="lazy"
-                        decoding="async">
+                    <picture>
+                        <source srcset="images/our-vision.webp" type="image/webp">
+                        <img src="images/our-vision.jpg" alt="YCCCI Community" width="600" height="450" loading="lazy"
+                            decoding="async">
+                    </picture>
                 </div>
 
                 <div class="about-content fade-in-right">
@@ -191,8 +200,11 @@
             <div class="activity-grid">
                 <div class="activity-card fade-in">
                     <div class="activity-card-image">
-                        <img src="images/donation-img.jpg" alt="Charity Outreach" width="400" height="220"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/donation-img.webp" type="image/webp">
+                            <img src="images/donation-img.jpg" alt="Charity Outreach" width="400" height="220"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="activity-card-body">
                         <span class="activity-date">January 2026</span>
@@ -211,8 +223,11 @@
 
                 <div class="activity-card fade-in" style="transition-delay: 0.1s;">
                     <div class="activity-card-image">
-                        <img src="images/youth-fellowship.png" alt="Youth Fellowship" width="400" height="220"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/youth-fellowship.webp" type="image/webp">
+                            <img src="images/youth-fellowship.png" alt="Youth Fellowship" width="400" height="220"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="activity-card-body">
                         <span class="activity-date">February 2026</span>
@@ -231,8 +246,11 @@
 
                 <div class="activity-card fade-in" style="transition-delay: 0.2s;">
                     <div class="activity-card-image">
-                        <img src="images/bible-studies.png" alt="Bible Study" width="400" height="220" loading="lazy"
-                            decoding="async">
+                        <picture>
+                            <source srcset="images/bible-studies.webp" type="image/webp">
+                            <img src="images/bible-studies.png" alt="Bible Study" width="400" height="220" loading="lazy"
+                                decoding="async">
+                        </picture>
                     </div>
                     <div class="activity-card-body">
                         <span class="activity-date">March 2026</span>
@@ -351,8 +369,11 @@
             <div class="novena-grid">
                 <div class="novena-card fade-in">
                     <div class="novena-card-image">
-                        <img src="images/sacredheart-novena.png" alt="Sacred Heart Novena" width="400" height="220"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/sacredheart-novena.webp" type="image/webp">
+                            <img src="images/sacredheart-novena.png" alt="Sacred Heart Novena" width="400" height="220"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="novena-card-body">
                         <span class="novena-days">9 Days</span>
@@ -371,8 +392,11 @@
 
                 <div class="novena-card fade-in" style="transition-delay: 0.1s;">
                     <div class="novena-card-image">
-                        <img src="images/holyrosary-img.png" alt="Our Lady of the Rosary Novena" width="400"
-                            height="220" loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/holyrosary-img.webp" type="image/webp">
+                            <img src="images/holyrosary-img.png" alt="Our Lady of the Rosary Novena" width="400"
+                                height="220" loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="novena-card-body">
                         <span class="novena-days">9 Days</span>
@@ -391,8 +415,11 @@
 
                 <div class="novena-card fade-in" style="transition-delay: 0.2s;">
                     <div class="novena-card-image">
-                        <img src="images/st-josephnovena.png" alt="St. Joseph Novena" width="400" height="220"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/st-josephnovena.webp" type="image/webp">
+                            <img src="images/st-josephnovena.png" alt="St. Joseph Novena" width="400" height="220"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="novena-card-body">
                         <span class="novena-days">9 Days</span>
@@ -429,32 +456,44 @@
 
             <div class="leadership-grid">
                 <div class="leader-card fade-in">
-                    <img src="images/youngforchristlogo.png" alt="Fr. John Michael" class="leader-image" width="120"
-                        height="120" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="images/youngforchristlogo.webp" type="image/webp">
+                        <img src="images/youngforchristlogo.png" alt="Fr. John Michael" class="leader-image" width="120"
+                            height="120" loading="lazy" decoding="async">
+                    </picture>
                     <h3>Fr. John Michael</h3>
                     <span class="leader-position">Spiritual Director</span>
                     <p class="leader-bio">Guiding our community with wisdom and pastoral care.</p>
                 </div>
 
                 <div class="leader-card fade-in" style="transition-delay: 0.1s;">
-                    <img src="images/youngforchristlogo.png" alt="Sarah Emmanuel" class="leader-image" width="120"
-                        height="120" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="images/youngforchristlogo.webp" type="image/webp">
+                        <img src="images/youngforchristlogo.png" alt="Sarah Emmanuel" class="leader-image" width="120"
+                            height="120" loading="lazy" decoding="async">
+                    </picture>
                     <h3>Sarah Emmanuel</h3>
                     <span class="leader-position">President</span>
                     <p class="leader-bio">Leading with vision and dedication to the YCCCI mission.</p>
                 </div>
 
                 <div class="leader-card fade-in" style="transition-delay: 0.2s;">
-                    <img src="images/youngforchristlogo.png" alt="David Peter" class="leader-image" width="120"
-                        height="120" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="images/youngforchristlogo.webp" type="image/webp">
+                        <img src="images/youngforchristlogo.png" alt="David Peter" class="leader-image" width="120"
+                            height="120" loading="lazy" decoding="async">
+                    </picture>
                     <h3>David Peter</h3>
                     <span class="leader-position">Vice President</span>
                     <p class="leader-bio">Supporting the community through faithful service.</p>
                 </div>
 
                 <div class="leader-card fade-in" style="transition-delay: 0.3s;">
-                    <img src="images/youngforchristlogo.png" alt="Mary Grace" class="leader-image" width="120"
-                        height="120" loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="images/youngforchristlogo.webp" type="image/webp">
+                        <img src="images/youngforchristlogo.png" alt="Mary Grace" class="leader-image" width="120"
+                            height="120" loading="lazy" decoding="async">
+                    </picture>
                     <h3>Mary Grace</h3>
                     <span class="leader-position">Secretary</span>
                     <p class="leader-bio">Ensuring our community runs smoothly and effectively.</p>
@@ -589,48 +628,66 @@
 
             <div class="gallery-grid">
                 <div class="gallery-item fade-in" data-category="events">
-                    <img src="images/youth-fellowship.png" alt="YCCCI Worship Night" width="400" height="300"
-                        loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="images/youth-fellowship.webp" type="image/webp">
+                        <img src="images/youth-fellowship.png" alt="YCCCI Worship Night" width="400" height="300"
+                            loading="lazy" decoding="async">
+                    </picture>
                     <div class="gallery-item-overlay">
                         <span>Worship Night</span>
                     </div>
                 </div>
 
                 <div class="gallery-item fade-in" style="transition-delay: 0.1s;" data-category="charity">
-                    <img src="images/donation-img.jpg" alt="Charity Work" width="400" height="300" loading="lazy"
-                        decoding="async">
+                    <picture>
+                        <source srcset="images/donation-img.webp" type="image/webp">
+                        <img src="images/donation-img.jpg" alt="Charity Work" width="400" height="300" loading="lazy"
+                            decoding="async">
+                    </picture>
                     <div class="gallery-item-overlay">
                         <span>Charity Outreach</span>
                     </div>
                 </div>
 
                 <div class="gallery-item fade-in" style="transition-delay: 0.2s;" data-category="retreats">
-                    <img src="images/our-vision.jpg" alt="Annual Retreat" width="400" height="300" loading="lazy"
-                        decoding="async">
+                    <picture>
+                        <source srcset="images/our-vision.webp" type="image/webp">
+                        <img src="images/our-vision.jpg" alt="Annual Retreat" width="400" height="300" loading="lazy"
+                            decoding="async">
+                    </picture>
                     <div class="gallery-item-overlay">
                         <span>Annual Retreat</span>
                     </div>
                 </div>
 
                 <div class="gallery-item fade-in" style="transition-delay: 0.3s;" data-category="worship">
-                    <img src="images/sacredheart-novena.png" alt="Praise and Worship" width="400" height="300"
-                        loading="lazy" decoding="async">
+                    <picture>
+                        <source srcset="images/sacredheart-novena.webp" type="image/webp">
+                        <img src="images/sacredheart-novena.png" alt="Praise and Worship" width="400" height="300"
+                            loading="lazy" decoding="async">
+                    </picture>
                     <div class="gallery-item-overlay">
                         <span>Praise &amp; Worship</span>
                     </div>
                 </div>
 
                 <div class="gallery-item fade-in" style="transition-delay: 0.4s;" data-category="pilgrimages">
-                    <img src="images/holyrosary-img.png" alt="Marian Pilgrimage" width="400" height="300" loading="lazy"
-                        decoding="async">
+                    <picture>
+                        <source srcset="images/holyrosary-img.webp" type="image/webp">
+                        <img src="images/holyrosary-img.png" alt="Marian Pilgrimage" width="400" height="300" loading="lazy"
+                            decoding="async">
+                    </picture>
                     <div class="gallery-item-overlay">
                         <span>Pilgrimage</span>
                     </div>
                 </div>
 
                 <div class="gallery-item fade-in" style="transition-delay: 0.5s;" data-category="conferences">
-                    <img src="images/bible-studies.png" alt="Youth Conference" width="400" height="300" loading="lazy"
-                        decoding="async">
+                    <picture>
+                        <source srcset="images/bible-studies.webp" type="image/webp">
+                        <img src="images/bible-studies.png" alt="Youth Conference" width="400" height="300" loading="lazy"
+                            decoding="async">
+                    </picture>
                     <div class="gallery-item-overlay">
                         <span>Youth Conference</span>
                     </div>
@@ -657,8 +714,11 @@
             <div class="news-grid">
                 <div class="news-card fade-in">
                     <div class="news-card-image">
-                        <img src="images/youth-fellowship.png" alt="New Leadership Team" width="400" height="200"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/youth-fellowship.webp" type="image/webp">
+                            <img src="images/youth-fellowship.png" alt="New Leadership Team" width="400" height="200"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="news-card-body">
                         <span class="news-date">January 10, 2026</span>
@@ -670,8 +730,11 @@
 
                 <div class="news-card fade-in" style="transition-delay: 0.1s;">
                     <div class="news-card-image">
-                        <img src="images/our-vision.jpg" alt="Annual Retreat Registration" width="400" height="200"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/our-vision.webp" type="image/webp">
+                            <img src="images/our-vision.jpg" alt="Annual Retreat Registration" width="400" height="200"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="news-card-body">
                         <span class="news-date">January 5, 2026</span>
@@ -683,8 +746,11 @@
 
                 <div class="news-card fade-in" style="transition-delay: 0.2s;">
                     <div class="news-card-image">
-                        <img src="images/donation-img.jpg" alt="Christmas Outreach" width="400" height="200"
-                            loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="images/donation-img.webp" type="image/webp">
+                            <img src="images/donation-img.jpg" alt="Christmas Outreach" width="400" height="200"
+                                loading="lazy" decoding="async">
+                        </picture>
                     </div>
                     <div class="news-card-body">
                         <span class="news-date">December 28, 2025</span>
@@ -772,7 +838,10 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="index.html" class="navbar-logo">
-                        <img src="images/youngforchristlogo.png" alt="YCCCI Logo" width="48" height="48">
+                        <picture>
+                            <source srcset="images/youngforchristlogo.webp" type="image/webp">
+                            <img src="images/youngforchristlogo.png" alt="YCCCI Logo" width="48" height="48" decoding="async">
+                        </picture>
                         <div class="logo-text" style="color: var(--white);">
                             YCCCI
                             <span class="logo-text-small" style="color: rgba(255,255,255,0.5);">Young and Chosen for
