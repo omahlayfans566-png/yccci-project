@@ -3094,6 +3094,690 @@ p {
   }
 }
 
+/* ============================================
+   Prayer Section - Redesigned Components
+   ============================================ */
+
+/* ----- Section Alt (alternating background) ----- */
+.section-alt {
+  background: var(--light-gray);
+}
+
+/* ----- Daily Prayer Grid & Cards ----- */
+.daily-prayer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+.daily-prayer-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(26, 58, 92, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-prayer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.daily-prayer-card-top {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.daily-prayer-card-top::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+}
+
+.daily-prayer-icon {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+}
+
+.daily-prayer-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.daily-prayer-time {
+  font-family: var(--font-accent);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--secondary-light);
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.5px;
+}
+
+.daily-prayer-body {
+  padding: var(--space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.daily-prayer-body h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-xs);
+  color: var(--primary-dark);
+}
+
+.daily-prayer-body p {
+  font-size: var(--text-sm);
+  color: var(--gray);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.read-prayer-btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* ----- Monthly Novena Grid & Cards ----- */
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-lg);
+}
+
+.month-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: all var(--transition-base);
+  border: 1px solid rgba(26, 58, 92, 0.06);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.month-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--secondary), var(--secondary-light));
+  transform: scaleX(0);
+  transition: transform var(--transition-base);
+}
+
+.month-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary-light);
+}
+
+.month-card:hover::before {
+  transform: scaleX(1);
+}
+
+.month-card-number {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--secondary);
+  line-height: 1;
+}
+
+.month-card h3 {
+  font-size: var(--text-base);
+  color: var(--primary-dark);
+  margin-bottom: 0;
+}
+
+.month-card p {
+  font-size: var(--text-xs);
+  color: var(--gray);
+  margin-bottom: 0;
+}
+
+.month-card-count {
+  display: inline-block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--white);
+  background: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  margin-top: var(--space-xs);
+}
+
+/* ----- First Saturday Premium Card ----- */
+.first-saturday-card {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.first-saturday-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.first-saturday-badge {
+  display: inline-block;
+  background: var(--secondary);
+  color: var(--white);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0 0 var(--radius-md) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.first-saturday-content {
+  padding: var(--space-2xl);
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.first-saturday-icon {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--secondary-light);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.first-saturday-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.first-saturday-text h3 {
+  font-size: var(--text-2xl);
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+}
+
+.first-saturday-text p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.first-saturday-schedule,
+.first-saturday-time {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.first-saturday-text .placeholder-text {
+  color: var(--secondary-light);
+  font-style: italic;
+}
+
+.first-saturday-text .btn {
+  margin-top: var(--space-md);
+}
+
+/* ----- Weekly Prayer Intentions Grid ----- */
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-xl);
+}
+
+.weekly-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(26, 58, 92, 0.06);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekly-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.weekly-card-week {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: var(--white);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.weekly-card-body {
+  padding: var(--space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekly-card-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  margin-bottom: var(--space-md);
+}
+
+.weekly-card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.weekly-card-body h3 {
+  font-size: var(--text-lg);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.weekly-card-body p {
+  font-size: var(--text-sm);
+  color: var(--gray);
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.weekly-card-link {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--primary);
+  transition: color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.weekly-card:hover .weekly-card-link {
+  color: var(--primary-light);
+}
+
+/* ----- Prayer Detail Pages ----- */
+.prayer-detail-section {
+  padding: var(--space-3xl) 0;
+}
+
+.prayer-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.prayer-detail-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.prayer-detail-header .prayer-detail-icon {
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  margin: 0 auto var(--space-lg);
+}
+
+.prayer-detail-header .prayer-detail-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.prayer-detail-header h1 {
+  font-size: var(--text-3xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.prayer-detail-header .prayer-detail-meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  font-size: var(--text-sm);
+  color: var(--gray);
+}
+
+.prayer-detail-header .prayer-detail-meta span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.prayer-detail-header .prayer-detail-meta svg {
+  width: 16px;
+  height: 16px;
+  color: var(--secondary);
+}
+
+.prayer-detail-body {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(26, 58, 92, 0.06);
+}
+
+.prayer-detail-body .prayer-text {
+  font-size: var(--text-base);
+  line-height: 1.8;
+  color: var(--near-black);
+}
+
+.prayer-detail-body .prayer-text p {
+  margin-bottom: var(--space-md);
+}
+
+.prayer-detail-body .prayer-text .prayer-response {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.prayer-detail-body .prayer-text .prayer-direction {
+  color: var(--secondary-dark);
+  font-style: italic;
+  font-size: var(--text-sm);
+}
+
+.prayer-detail-body .prayer-text h4 {
+  font-size: var(--text-lg);
+  color: var(--primary-dark);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-heading);
+}
+
+.prayer-detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-xl);
+  transition: gap var(--transition-fast);
+}
+
+.prayer-detail-back:hover {
+  gap: var(--space-md);
+  color: var(--primary-light);
+}
+
+/* ----- Monthly Novena Detail Page ----- */
+.monthly-novena-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.monthly-novena-header h1 {
+  font-size: var(--text-3xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.monthly-novena-header p {
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.monthly-novena-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-xl);
+}
+
+.monthly-novena-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  border: 1px solid rgba(26, 58, 92, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.monthly-novena-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.monthly-novena-image {
+  height: 200px;
+  overflow: hidden;
+  background: var(--light-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monthly-novena-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.monthly-novena-card:hover .monthly-novena-image img {
+  transform: scale(1.05);
+}
+
+.monthly-novena-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: var(--white);
+}
+
+.monthly-novena-image-placeholder svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.monthly-novena-body {
+  padding: var(--space-lg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.monthly-novena-body h3 {
+  font-size: var(--text-xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-xs);
+}
+
+.monthly-novena-body p {
+  font-size: var(--text-sm);
+  color: var(--gray);
+  margin-bottom: var(--space-lg);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.monthly-novena-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+/* ----- Weekly Prayer Detail Page ----- */
+.weekly-detail-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.weekly-detail-header h1 {
+  font-size: var(--text-3xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.weekly-detail-header .weekly-detail-week {
+  display: inline-block;
+  background: var(--secondary);
+  color: var(--white);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  margin-bottom: var(--space-md);
+}
+
+/* ----- Responsive for Prayer Components ----- */
+@media (max-width: 768px) {
+  .daily-prayer-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  .month-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .first-saturday-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .first-saturday-icon {
+    margin-bottom: var(--space-sm);
+  }
+
+  .weekly-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prayer-detail-body {
+    padding: var(--space-lg);
+  }
+
+  .monthly-novena-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .monthly-novena-actions {
+    flex-direction: column;
+  }
+
+  .monthly-novena-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .daily-prayer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .month-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .month-card {
+    padding: var(--space-md);
+  }
+
+  .month-card-number {
+    font-size: var(--text-xl);
+  }
+
+  .month-card h3 {
+    font-size: var(--text-sm);
+  }
+
+  .month-card p {
+    display: none;
+  }
+
+  .month-card-count {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+  }
+
+  .prayer-detail-header h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .monthly-novena-header h1 {
+    font-size: var(--text-2xl);
+  }
+}
+
 /* ----- Utility Classes ----- */
 .text-center {
   text-align: center;
