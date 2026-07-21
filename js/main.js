@@ -595,8 +595,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const successModal = document.getElementById('donationSuccessModal');
         const modalCloseBtn = document.getElementById('modalCloseBtn');
 
-        // WhatsApp number - replace with organization's official number
-        const WHATSAPP_NUMBER = '+234XXXXXXXXXX';
+        // WhatsApp number
+        const WHATSAPP_NUMBER = '+393333534560';
 
         let selectedFile = null;
 
@@ -810,29 +810,16 @@ document.addEventListener('DOMContentLoaded', function () {
             const paymentMethod = paymentMethodInput.value;
             const narration = narrationInput.value.trim();
 
-            const message = `Hello,
+            const message = `*Donation Submission - Young and Chosen for Christ*
 
-A new donation has been submitted.
+👤 *Donor Name:* ${name}
+📧 *Email:* ${email || 'Not provided'}
+📞 *Phone:* ${phone}
+💰 *Amount:* ₦${amount}
+📋 *Purpose:* ${narration}
+💳 *Payment Method:* ${paymentMethod}
 
-Name:
-${name}
-
-Phone:
-${phone}
-
-Email:
-${email || 'Not provided'}
-
-Donation Amount:
-₦${amount}
-
-Payment Method:
-${paymentMethod}
-
-Narration:
-${narration}
-
-Thank you.`;
+*Important:* Please attach your proof of payment (image/PDF) manually to this message before sending.`;
 
             // Open WhatsApp
             const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
@@ -871,5 +858,152 @@ Thank you.`;
                 closeDonationModal();
             }
         });
+    }
+
+    // ============================================
+    // Copy Account Number Functionality
+    // ============================================
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    const toastNotification = document.getElementById('toastNotification');
+
+    if (copyButtons.length > 0) {
+        copyButtons.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const accountNumber = this.getAttribute('data-account');
+                if (!accountNumber) return;
+
+                // Copy to clipboard
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(accountNumber).then(function () {
+                        showToast();
+                    }).catch(function () {
+                        fallbackCopy(accountNumber);
+                    });
+                } else {
+                    fallbackCopy(accountNumber);
+                }
+            });
+        });
+    }
+
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            showToast();
+        } catch (e) {
+            // Fallback: select and instruct user
+            alert('Please manually copy: ' + text);
+        }
+        document.body.removeChild(textarea);
+    }
+
+    function showToast() {
+        if (!toastNotification) return;
+        toastNotification.classList.add('active');
+        setTimeout(function () {
+            toastNotification.classList.remove('active');
+        }, 3000);
+    }
+
+    // ============================================
+    // Contact Form - Premium Contact Form WhatsApp
+    // ============================================
+    const premiumContactForm = document.querySelector('.premium-contact-form');
+
+    if (premiumContactForm) {
+        premiumContactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nameInput = this.querySelector('#name');
+            const emailInput = this.querySelector('#email');
+            const subjectInput = this.querySelector('#subject');
+            const messageInput = this.querySelector('#message');
+
+            let isValid = true;
+
+            // Remove existing errors
+            this.querySelectorAll('.premium-form-error').forEach(el => el.remove());
+            this.querySelectorAll('.premium-form-input.error, .premium-form-textarea.error').forEach(el => {
+                el.classList.remove('error');
+            });
+
+            // Validate name
+            if (!nameInput || !nameInput.value.trim()) {
+                showPremiumError(nameInput, 'Please enter your full name.');
+                isValid = false;
+            }
+
+            // Validate email
+            if (!emailInput || !emailInput.value.trim()) {
+                showPremiumError(emailInput, 'Please enter your email address.');
+                isValid = false;
+            } else if (!isValidEmail(emailInput.value)) {
+                showPremiumError(emailInput, 'Please enter a valid email address.');
+                isValid = false;
+            }
+
+            // Validate message
+            if (!messageInput || !messageInput.value.trim()) {
+                showPremiumError(messageInput, 'Please enter your message.');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const subject = subjectInput ? subjectInput.value.trim() : '';
+            const message = messageInput.value.trim();
+
+            const whatsappMessage = `*Contact Message - Young and Chosen for Christ*
+
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+📝 *Subject:* ${subject || 'Not specified'}
+💬 *Message:*
+${message}`;
+
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+
+            // Visual feedback
+            const submitBtn = this.querySelector('.premium-submit-btn');
+            const originalText = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.innerHTML = '✓ Message Prepared!';
+                submitBtn.style.background = 'var(--success)';
+                submitBtn.style.borderColor = 'var(--success)';
+
+                setTimeout(function () {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.style.borderColor = '';
+                }, 3000);
+            }
+
+            this.reset();
+        });
+    }
+
+    function showPremiumError(input, message) {
+        if (!input) return;
+        input.classList.add('error');
+        const error = document.createElement('span');
+        error.className = 'premium-form-error';
+        error.style.cssText = 'color: var(--error); font-size: var(--text-xs); margin-top: 4px; display: block;';
+        error.textContent = message;
+        input.parentNode.appendChild(error);
+
+        input.addEventListener('input', function () {
+            this.classList.remove('error');
+            const err = this.parentNode.querySelector('.premium-form-error');
+            if (err) err.remove();
+        }, { once: true });
     }
 });
