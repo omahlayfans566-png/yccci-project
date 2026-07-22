@@ -1296,15 +1296,14 @@ p {
 
 .gallery-item {
   position: relative;
-  border-radius: var(--radius-md);
+  border-radius: 4px;
   overflow: hidden;
   cursor: pointer;
   aspect-ratio: 4/3;
 }
 
 .gallery-item:nth-child(3n) {
-  grid-row: span 2;
-  aspect-ratio: auto;
+  aspect-ratio: 4/3;
 }
 
 .gallery-item img,
@@ -1365,6 +1364,96 @@ p {
   background: var(--primary);
   color: var(--white);
   border-color: var(--primary);
+}
+
+/* ----- Gallery Album Sections ----- */
+.gallery-sections {
+  margin-top: var(--space-2xl);
+}
+
+.gallery-section {
+  display: none;
+}
+
+.gallery-section.active {
+  display: block;
+}
+
+.gallery-album-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-lg);
+  margin-top: var(--space-2xl);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--secondary);
+  display: inline-block;
+}
+
+.gallery-album-title:first-child {
+  margin-top: 0;
+}
+
+.gallery-album-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.gallery-album-item {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  background: var(--light-gray);
+}
+
+.gallery-album-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.gallery-album-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-album-item .gallery-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 58, 92, 0.8), transparent);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-lg);
+}
+
+.gallery-album-item:hover .gallery-item-overlay {
+  opacity: 1;
+}
+
+.gallery-album-item .gallery-item-overlay span {
+  color: var(--white);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 768px) {
+  .gallery-album-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 480px) {
+  .gallery-album-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ----- Event Cards ----- */

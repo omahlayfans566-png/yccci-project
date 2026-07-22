@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ----- Gallery Category Filter -----
     const categoryBtns = document.querySelectorAll('.gallery-cat-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
+    const gallerySections = document.querySelectorAll('.gallery-section');
 
     if (categoryBtns.length > 0 && galleryItems.length > 0) {
         categoryBtns.forEach(btn => {
@@ -144,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const filter = this.getAttribute('data-filter');
 
+                // Handle main gallery grid items
                 galleryItems.forEach(item => {
                     if (filter === 'all') {
                         item.style.display = 'block';
@@ -168,6 +170,20 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
                     }
                 });
+
+                // Handle gallery album sections
+                if (gallerySections.length > 0) {
+                    gallerySections.forEach(section => {
+                        const sectionName = section.getAttribute('data-section');
+                        if (filter === 'all') {
+                            section.style.display = 'block';
+                        } else if (sectionName && sectionName === filter) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                }
             });
         });
     }
